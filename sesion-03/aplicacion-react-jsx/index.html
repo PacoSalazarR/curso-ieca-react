@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Aplicacion React</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        const items = [];
+
+        const addItem = () => {
+            const text = document.getElementById("input").value;
+            items.push({
+                completed: false,
+                text: text,
+            });
+            render();
+        };
+
+        const changeStatus = (item) => {
+            item.completed = !item.completed;
+            render();
+        };
+
+        const deleteItem = (item) => {
+            const index = items.indexOf(item);
+            items.splice(index, 1);
+            render();
+        };
+
+        const ListItem = ({ item }) => {
+            return <li key={item.key}>
+                <input type="checkbocx" checked={item.completed} onChange={() => changeStatus(item)} />
+                <span style={{textDecoration: item.completed ? "line-through" : "none"}}>{item.text}</span>
+                <button onClick={() => deleteItem(item)}>Eliminar</button>
+            </li>
+        }
+
+    </script>
+</body>
+
+</html>
